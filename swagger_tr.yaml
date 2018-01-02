@@ -4,17 +4,29 @@ info:
   title: 'iyzipay'
   description: |
     # Disclaimer
-    This is not an official api doc for iyzico.
+    iyzico resmi api dökümantasyonu değildir. 
+    https://dev.iyzipay.com/tr adresinden iyzico resmi api dökümantasyonuna ulaşabilirsiniz.
     
-    # Getting started
+    # Başlarken
   
-    The iyzico API has been developed to support merchants with extended online payment services and can be easily integrated into existing platforms. All services are based on a stateless RESTful service architecture that requires API clients to access these services (e.g. for data marshalling / unmarshalling and PKI [public key infrastructure] encryption / decryption). You can follow the steps below to get started.'
-    ## Create a sandbox account
+    iyzico ödeme API’si, internet üzerinden ödeme kabul eden tüm üye işyerlerine hitap edecek bir şekilde, oturum bilgisi tutmayan (stateless) Restful servis odaklı bir mimaride geliştirilmiştir. iyzico'nun sunduğu sunucu taraflı programlama diline uygun istemciler(client) ile çok kolay entegre olunabilir. Başlamak için aşağıdaki adımları izleyebilirsiniz.
 
-    Sign up for a free <a href="https://sandbox-merchant.iyzipay.com/login?lang=en" target="_blank"> Sandbox</a> account to test and verify your integration. 
-    ## Learn how to  perform integration
+    ## Sandbox(test) hesabı oluşturmak
 
-    iyzico provides several methods of integration that perfectly suit your needs and support 6 different server-side languages.
+    iyzico servislerini test edebilmek için bu <a href="https://sandbox-merchant.iyzipay.com/register" target="_blank">adresten</a> kaydınızı gerçekleştirebilirsiniz. Email aktivasyonu gerekmeden giriş yapıp <a href="https://sandbox-merchant.iyzipay.com/settings" target="_blank"> **"Ayarlar"** </a> menüsünden servisleri test edebileceğiniz API ve Güvenlik anahtar değerlerine ulaşabilirsiniz. 
+
+    >>> Sandbox(test) kontrol panelinden alınan anahtarlar **https://sandbox-api.iyzipay.com** sorgu adresi(baseUrl) ile çalışmaktadır.
+
+    ![](sandbox_ayarlar.jpg)
+
+    >>> Sandbox(test) ortamında kullanılan değerler ve sorgu adresi(baseUrl) canlı ortamdaki değerler ve sorgu adresinden tamamen farklıdır.
+
+    ## İstemci(client) seçimi
+
+    iyzico entegrasyon için, sunucu taraflı programlama diline uygun 6 farklı istemci(client) sunar. Bu istemcilerden programlama yapmak istediğiniz dile uygun olanı seçip sandbox(test) bilgileri ile kullanmaya başlayabilirsiniz.
+
+    >>> Projenizde kullandığınız istemciyi github hesabınız ile takip etmeyi unutmayınız. Böylece gelecek olan güncelleme ve yeniliklerden haberdar olabilirsiniz.
+    iyzico servislerini test edebilmek için bu <a href="https://sandbox-merchant.iyzipay.com/register" target="_blank">adresten</a> kaydınızı gerçekleştirebilirsiniz. Email aktivasyonu gerekmeden giriş yapıp <a href="https://sandbox-merchant.iyzipay.com/settings" target="_blank"> <strong>"Ayarlar"</strong> </a> menüsünden servisleri test edebileceğiniz API ve Güvenlik anahtar değerlerine ulaşabilirsiniz.
 
     <style>
     #body img{
@@ -22,31 +34,73 @@ info:
     }
     </style>
     <a href="https://github.com/iyzico/iyzipay-php/releases/latest" target="_blank">PHP</a>
+    </br>
     <a href="https://github.com/iyzico/iyzipay-dotnet/releases/latest" target="_blank">.NET</a>
+    </br>
     <a href="https://github.com/iyzico/iyzipay-java/releases/latest" target="_blank">JAVA</a>
+    </br>
     <a href="https://github.com/iyzico/iyzipay-node/releases/latest" target="_blank">NODE</a>
+    </br>
     <a href="https://github.com/iyzico/iyzipay-ruby/releases/latest" target="_blank">RUBY</a>
+    </br>
     <a href="https://github.com/iyzico/iyzipay-python/releases/latest" target="_blank">PYTHON</a>
     
-    ##  Choose your integration method
-    
-    iyzico provides a collection of requests to help you build integrations for a wide range of use cases. Merchants can integrate with our <a href="https://dev.iyzipay.com/en/api"> Payment API</a>.
-    
-    ##  Going Live
-    
-    * Change your keys for the production enviroment.
-    * Review your error handling.
-    * Dont forget to use the [iyzico logo pack](iyzico-logo-pack.zip) for your payment page.
-    * Review your integration with incomplete and duplicate and invalid data's.
-    * Dont forget to match the response data (paidPrice, price, basketid) with your websitede records. 
+    ## Entegrasyon metoduna karar vermek
 
+    <a href="https://dev.iyzipay.com/tr/odeme-formu">**Ödeme Formu**:</a>
+    Eğer işletmenizin amacı hızlı ve kolay bir şekilde ödeme almaya başlamak ise iyzico ödeme formunu tercih edilebilirsiniz. Ön yüz kontrolleri, BIN sorgulama, Taksit Sorgulama, 3D Secure ile ödeme, BKM Express ve Kart saklama entegrasyonları için ek sorgu yapmaya gerek kalmadan tek bir entegrasyon ile işlemler tamamlanır. Ödeme bazında 3D Secure ayarı ve taksit komisyon yönetimi iyzico kontrol panelinden kolayca düzenlenebilir. Üye iş yeri tasarımına göre pop-up veya responsive olarak yüklenebilir. iframe ve ortak ödeme sayfası olarak kullanım şekilleri mevcuttur.
+
+    <a href="https://dev.iyzipay.com/tr/api">**API**:</a>
+    Üye işyeri kendi ödeme formunu kullanır. Bu entegrasyonda iyzico servisleri üye işyeri ödeme formunun arkasında çalışır. İstenilen servisler iş modelinin ihtiyacına göre entegre edilebilir. 
+
+    ## Entegrasyon sürecinde dikkat edilecek noktalar
+
+    ** Canlı ortamda iyzico API'ına gönderilen parametrelere müşteriden alınan bilgiler set edilmelidir. Müşteriniden alınmayan "dummy" değerler sorgu parametrelerine set edilmemelidir.
+    
+    ** Ödeme işlemi sonucunda iyzico tarafından dönen cevaptaki değerler (price, paidPrice, basketId, conversationId) ile sizin sisteminize kaydettiğiniz değerleri karşılaştırarak bir farklılık var ise genel bir hata mesajı gösterebilirsiniz.
+    
+    ** Bu tür durumlarda iyzico entegrasyon ekibi ile iletişime geçmeyi unutmayınız. Müşteri tarafından ödenen tutar iyzico tarafından dönen cevaptaki paidPrice parametresindeki değere eşittir.
+
+    ## Canlı ortama geçiş
+
+    ** Geliştirmeler tamamlandıktan sonra ödeme adımlarınızı, test kartlarınız ile tüm durumlar için test edin.
+    
+    ** iyzico servislerinden dönen ve olabilecek tüm hataları karşılayacak şekilde kodunuzu düzenleyin.
+    
+    ** Sonuç sayfanızın iyzico'dan gelen yanıtı yorumlayabiliyor olmasına dikkat edin.
+    
+    ** Hassas olmayan dataları ve yanıtları loglamaya dikkat edin.
+    
+    ** Entegrasyonunuzun son kullanıcılar için <a href="https://dev.iyzipay.com/tr/sss" target="_blank">Kişisel Verilerin Koruması Kanunu</a> ile uyumlu olmasına dikkat edin.
+    
+    ** iyzico logolarını sitenize eklemeyi unutmayın. [iyzico logo paketi](iyzico-logo-pack.zip).
+    
+    ** iyzico entegrasyon ekibinin onayı için <a href="mailto:entegrasyon@iyzico.com">**entegrasyon@iyzico.com**</a> mail adresi ile iletişime geçin.
+    
+    
 host: "sandbox-api.iyzipay.com"
 schemes:
  - "https"
+ 
+tags:
+  - name: Api
+    description: | 
+      API entegrasyonunda üye işyeri kendi ödeme formunu kullanır. Bu form üzerindeki kontrolleri ve kuralları uygulaması gerekir.
+      
+      ** Kart numarası(PAN) luhn algoritmasına tabi tutulmalıdır.
+      
+      ** Kartın hamilinin adı ve soyadı alınmalıdır.
+      
+      ** Son kullanma tarihi geçmiş kartlar ile API'ye sorgu yapılmamalıdır.
+      
+      ** AMEX kartları ile işlem alabilir şekilde tasarlanmalıdır.
+      
+      iyzico arka planda çalıştığından üye işyerinin ihtiyaçlarına göre istenilen servisler entegre edilebilir.
+
 paths:
   /payment/test:
     get:
-      description: 'Health Check'
+      description: 'https://sandbox-api.iyzipay.com/payment/test'
       summary: Health Check
       tags:
       - Api
@@ -56,55 +110,11 @@ paths:
       responses:
         200:
           description: ''
-  /payment/test#:
-    get:
-      description: 'Health Check'
-      summary: Health Check
-      tags:
-      - Api
-      operationId: Heath Check
-      produces:
-      - application/json
-      responses:
-        200:
-          description: ''   
-  /payment/bin/check:
-    post:
-      description: 'This service returns information about card.'
-      summary: Retrieve Bin
-      tags:
-      - Api
-      operationId: Retrieve Bin
-      produces:
-      - application/json
-      parameters:
-      - name: Body
-        in: body
-        required: true
-        description: ''
-        schema:
-          $ref: '#/definitions/RetrieveBinNumberRequest'
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: ''
-        example: IYZWS sandbox-pZwBBHDkOYRHbvr4AMIgBDmCecc03QUU:rFwfwRXKN63UrCY2R8xXT0IPzpk=
-      - name: x-iyzi-rnd
-        in: header
-        required: true
-        type: string
-        description: ''
-        default: x-iyzi-rnd
-      responses:
-        '200':
-          description: success
           schema:
-            allOf:
-            - $ref: '#/definitions/RetrieveBinNumberResponse'
+            $ref: '#/definitions/HealthCheckResponse'
   /payment/iyzipos/installment:
     post:
-      description: 'This service returns information about installment options and card.'
+      description: 'Taksit sorgulama(installment), ilgili kart bir kredi kartı ise ve bir taksit programına dahil ise, kaç taksit yapılabileceği ve taksit komisyon oranı konusunda bilgi vermektedir.'
       summary: Retrieve Installment
       tags:
       - Api
@@ -123,25 +133,34 @@ paths:
         required: true
         type: string
         description: ''
-        default: 'IYZWS sandbox-rrQeCfgnKMADrV4eDCPOhETjK3DzN9OU:iVUDG7pIZp1h/dfox4jDBYqdJjA='
       - name: x-iyzi-rnd
         in: header
         required: true
         type: string
         description: ''
-        default: 'x-iyzi-rnd'
-      #- name: Content-Type
-      #  default : application/json
-      #  in: header
-      #  required: true
-      #  type: string
-      #  description: ''
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: 'Content-Type should be application/json'
+        example: application/json
       responses:
         200:
           description: success
+          schema:
+            $ref: '#/definitions/RetrieveInstallmentResponse'
   /payment/auth:
     post:
-      description: 'To charge a credit or a debit card, you can use an Auth request.'
+      description: | 
+        Ödeme sorgusu, müşterinin kredi kartından para çekme işlemini yapar. İlgili servis kullanıldığında iyzico işlemin başarılı olup olmadığı ile alakalı olarak yanıtı anında döner.
+
+        ** Üzerinde TROY, MASTERCARD, VISA, AMEX logolu kartlardan işlem yapmaya olanak verir.
+        
+        ** Üzerinde BONUS, WORLD, MAXIMUM, AXESS, CARDFINANS, PARAF, ADVANTAGE taksit programlarına dahil kartlar için 2, 3, 6, 9, 12 taksit seçenekleri bu servis ile kullanılabilir.
+        
+        ** Başarılı işlemler yeşil, başarısız işlemler ise kırmızı renkte panel üzerinde görüntülenebilir.
+        
+        ** Üye işyeri tarafında sipariş numarası olarak conversationId ve basketId parametreleri kullanılabilir.
       summary: Create Payment
       tags:
       - Api
@@ -173,7 +192,9 @@ paths:
       #  description: ''
       responses:
         200:
-          description: ''
+          description: success
+          schema:
+            $ref: '#/definitions/CreatePaymentResponse'
   /payment/3dsecure/initialize:
     post:
       description: 'TODO: Add Description'
@@ -908,6 +929,22 @@ paths:
         200:
           description: ''
 definitions:
+  HealthCheckResponse:
+    title: Health Check Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950
   RetrieveBinNumberRequest:
     title: Retrieve Bin Number Request
     type: object
@@ -927,8 +964,8 @@ definitions:
         example: 554960
     required:
     - binNumber
-  RetrieveBinNumberResponse:
-    title: Retrieve Bin Number Response
+  RetrieveInstallmentResponse:
+    title: Retrieve Installment Response
     type: object
     properties:
       status:
@@ -947,6 +984,15 @@ definitions:
         description: ''
         type: string
         example: 123456789
+      installmentDetails:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/installmentDetails'
+  installmentDetails:
+    title: installment Details
+    type: object
+    properties:
       binNumber:
         description: ''
         type: string
@@ -975,6 +1021,26 @@ definitions:
         description: ''
         type: string
         example: 0 
+      installmentPrices:
+        type: array
+        items:
+          $ref: '#/definitions/installmentPrices'
+  installmentPrices:
+    title: Installment Prices
+    type: object
+    properties:
+      installmentPrice:
+        description: ''
+        type: string
+        example: 100
+      totalPrice:
+        description: ''
+        type: string
+        example: 100
+      installmentNumber:
+        description: ''
+        type: string
+        example: 1
   RetrieveInstallmentRequest:
     title: Retrieve Installment Request
     type: object
@@ -993,7 +1059,7 @@ definitions:
         type: string
         example: "100.0"
       binNumber:
-        description: ''
+        description: 'Bin numarası set edilmez ise tüm kartlar için taksit seçenekleri dönecektir.'
         type: string
         example: 554960
     required:
@@ -2230,6 +2296,181 @@ definitions:
     - shippingAddress
     - billingAddress
     - basketItems
+  CreatePaymentResponse:
+    title: Create Payment Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950
+      conversationId:
+        description: ''
+        type: string
+        example: 123456789
+      price:
+        description: ''
+        type: string
+        example: 1.0
+      paidPrice:
+        description: ''
+        type: string
+        example: 1.0
+      installment:
+        description: ''
+        type: string
+        example: 1
+      paymentId:
+        description: ''
+        type: string
+        example: 123456
+      fraudStatus:
+        description: ''
+        type: string
+        example: 2
+      merchantCommissionRate:
+        description: ''
+        type: string
+        example: 0
+      merchantCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0
+      iyziCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0.02625
+      iyziCommissionFee:
+        description: ''
+        type: string
+        example: 0.25
+      cardType:
+        description: ''
+        type: string
+        example: CREDIT_CARD
+      cardAssociation:
+        description: ''
+        type: string
+        example: MASTER_CARD
+      cardFamily:
+        description: ''
+        type: string
+        example: Bonus
+      binNumber:
+        description: ''
+        type: string
+        example: 554960
+      lastFourDigits:
+        description: ''
+        type: string
+        example: 0016
+      basketId:
+        description: ''
+        type: string
+        example: B67832
+      currency:
+        description: ''
+        type: string
+        example: TRY
+      itemTransactions:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/itemTransactions'
+      authCode:
+        description: ''
+        type: string
+        example: 260627
+      phase:
+        description: ''
+        type: string
+        example: AUTH
+  itemTransactions:
+    title: Item Transactions
+    type: object
+    properties:
+      itemId:
+        description: ''
+        type: string
+        example: BI101
+      paymentTransactionId:
+        description: ''
+        type: string
+        example: 11207021
+      transactionStatus:
+        description: ''
+        type: string
+        example: 2
+      price:
+        description: ''
+        type: string
+        example: 1.0
+      paidPrice:
+        description: ''
+        type: string
+        example: 1.0
+      merchantCommissionRate:
+        description: ''
+        type: string
+        example: 0
+      merchantCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0
+      iyziCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0.02625
+      iyziCommissionFee:
+        description: ''
+        type: string
+        example: 0.25
+      merchantPayoutAmount:
+        description: ''
+        type: string
+        example: 0.72375
+      convertedPayout:
+          $ref: '#/definitions/convertedPayout'
+  convertedPayout:
+    title: Converted Payout
+    type: object
+    properties:
+      paidPrice:
+        description: ''
+        type: string
+        example: 1.0
+      iyziCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0.02625
+      iyziCommissionFee:
+        description: ''
+        type: string
+        example: 0.25
+      merchantPayoutAmount:
+        description: ''
+        type: string
+        example: 0.72375
+      iyziConversionRate:
+        description: ''
+        type: string
+        example: 0
+      iyziConversionRateAmount:
+        description: ''
+        type: string
+        example: 0
+      currency:
+        description: ''
+        type: string
+        example: TRY
   CreateThreedsPaymentrequest:
     title: Create Threeds PaymentRequest
     type: object
