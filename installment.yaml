@@ -1,0 +1,138 @@
+post:
+  description: |
+    Taksit sorgulama(installment), ilgili kart bir kredi kartı ise ve bir taksit programına dahil ise, kaç taksit yapılabileceği ve taksit komisyon oranı konusunda bilgi vermektedir.
+  summary: Retrieve Installment
+  tags:
+  - Api
+  operationId: Retrieve Installment
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/RetrieveInstallmentRequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: Content-Type
+    in: header
+    required: true
+    type: string
+    description: 'Content-Type should be application/json'
+    example: application/json
+  responses:
+    200:
+      description: success
+      schema:
+        $ref: '#/definitions/RetrieveInstallmentResponse'
+definitions:        
+  RetrieveInstallmentRequest:
+    title: Retrieve Installment Request
+    type: object
+    properties:
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+        default: tr
+      conversationId:
+        description: ''
+        type: string
+        example: 123456789
+      price:
+        description: ''
+        type: string
+        example: "100.0"
+      binNumber:
+        description: 'Bin numarası set edilmez ise tüm kartlar için taksit seçenekleri dönecektir.'
+        type: string
+        example: 554960
+    required:
+    - price
+  RetrieveInstallmentResponse:
+    title: Retrieve Installment Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950
+      conversationId:
+        description: ''
+        type: string
+        example: 123456789
+      installmentDetails:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/installmentDetails'
+  installmentDetails:
+    title: installment Details
+    type: object
+    properties:
+      binNumber:
+        description: ''
+        type: string
+        example: 554960
+      cardType:
+        description: ''
+        type: string
+        example: CREDIT_CARD
+      cardAssociation:
+        description: ''
+        type: string
+        example: MASTER_CARD
+      cardFamily:
+        description: ''
+        type: string
+        example: Bonus
+      bankName:
+        description: ''
+        type: string
+        example: Garanti Bankası
+      bankCode:
+        description: ''
+        type: string
+        example: 62
+      commercial:
+        description: ''
+        type: string
+        example: 0 
+      installmentPrices:
+        type: array
+        items:
+          $ref: '#/definitions/installmentPrices'
+  installmentPrices:
+    title: Installment Prices
+    type: object
+    properties:
+      installmentPrice:
+        description: ''
+        type: string
+        example: 100
+      totalPrice:
+        description: ''
+        type: string
+        example: 100
+      installmentNumber:
+        description: ''
+        type: string
+        example: 1

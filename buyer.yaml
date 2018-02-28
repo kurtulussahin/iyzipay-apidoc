@@ -1,0 +1,67 @@
+definitions:        
+  Buyer:
+    title: Buyer
+    type: object
+    properties:
+      id:
+        description: ''
+        type: string
+        example: BY789
+      name:
+        description: ''
+        type: string
+        example: John
+      surname:
+        description: ''
+        type: string
+        example: Doe
+      identityNumber:
+        description: ''
+        type: string
+        example: 74300864791
+      email:
+        description: ''
+        type: string
+        example: email@email.com
+      gsmNumber:
+        description: ''
+        type: string
+        example: '+905350000000'
+      registrationDate:
+        description: ''
+        type: string
+        example: '2013-04-21 15:12:09'
+      lastLoginDate:
+        description: ''
+        type: string
+        example: '2015-10-05 12:43:35'
+      registrationAddress:
+        description: ''
+        type: string
+        example: 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1'
+      city:
+        description: ''
+        type: string
+        example: Istanbul
+      country:
+        description: ''
+        type: string
+        example: Turkey
+      zipCode:
+        description: ''
+        type: string
+        example: 34732
+      ip:
+        description: ''
+        type: string
+        example: '85.34.78.112'
+    required:
+    - id
+    - name
+    - surname
+    - identityNumber
+    - email
+    - registrationAddress
+    - city
+    - country
+    - ip

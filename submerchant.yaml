@@ -1,0 +1,170 @@
+put:
+  description: 'TODO: Add Description'
+  summary: Update Company Submerchant
+  tags:
+  - Marketplace
+  operationId: Update Company Submerchant
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/UpdateCompanySubmerchantrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+post:
+  description: 'TODO: Add Description'
+  summary: Create Company Submerchant
+  tags:
+  - Marketplace
+  operationId: Create Company Submerchant
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/CreateCompanySubmerchantrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  UpdateCompanySubmerchantrequest:
+    title: Update Company SubmerchantRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+      email:
+        description: ''
+        type: string
+      gsmNumber:
+        description: ''
+        type: string
+      address:
+        description: ''
+        type: string
+      iban:
+        description: ''
+        type: string
+      taxOffice:
+        description: ''
+        type: string
+      legalCompanyTitle:
+        description: ''
+        type: string
+      currency:
+        description: ''
+        type: string
+      subMerchantKey:
+        description: ''
+        type: string
+      taxNumber:
+        description: ''
+        type: string
+    required:
+    - email
+    - address
+    - taxOffice
+    - legalCompanyTitle
+    - currency
+    - subMerchantKey
+    - taxNumber
+  CreateCompanySubmerchantrequest:
+    title: Create Company SubmerchantRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      name:
+        description: ''
+        type: string
+      email:
+        description: ''
+        type: string
+      gsmNumber:
+        description: ''
+        type: string
+      address:
+        description: ''
+        type: string
+      iban:
+        description: ''
+        type: string
+      taxOffice:
+        description: ''
+        type: string
+      legalCompanyTitle:
+        description: ''
+        type: string
+      currency:
+        description: ''
+        type: string
+      subMerchantExternalId:
+        description: ''
+        type: string
+      taxNumber:
+        description: ''
+        type: string
+      subMerchantType:
+        description: ''
+        type: string
+    required:
+    - email
+    - address
+    - iban
+    - taxOffice
+    - legalCompanyTitle
+    - currency
+    - subMerchantExternalId
+    - taxNumber
+    - subMerchantType

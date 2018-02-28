@@ -1,0 +1,88 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Initialize Checkout with Card User Key
+  tags:
+  - iyzico Checkout Form
+  operationId: Initialize Checkout with Card User Key
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/InitializeCheckoutWithCardUserKeyrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  InitializeCheckoutWithCardUserKeyrequest:
+    title: Initialize Checkout with Card User KeyRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      price:
+        description: ''
+        type: string
+      paidPrice:
+        description: ''
+        type: string
+      basketId:
+        description: ''
+        type: string
+      paymentGroup:
+        description: ''
+        type: string
+      cardUserKey:
+        description: ''
+        type: string
+      callbackUrl:
+        description: ''
+        type: string
+      enabledInstallments:
+        description: ''
+        type: array
+        items:
+          type: integer
+          format: int32
+      buyer:
+        $ref: 'buyer.yaml#/definitions/Buyer'
+      shippingAddress:
+        $ref: 'shippingAddress.yaml#/definitions/ShippingAddress'
+      billingAddress:
+        $ref: 'billingAddress.yaml#/definitions/BillingAddress'
+      basketItems:
+          $ref: 'basketItems.yaml#/definitions/BasketItems'
+    required:
+    - price
+    - paidPrice
+    - basketId
+    - paymentGroup
+    - cardUserKey
+    - callbackUrl
+    - buyer
+    - shippingAddress
+    - billingAddress
+    - basketItems

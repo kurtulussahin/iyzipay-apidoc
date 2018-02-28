@@ -1,0 +1,102 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Initialize APM
+  tags:
+  - APM
+  operationId: Initialize APM
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/InitializeApmrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  InitializeApmrequest:
+    title: Initialize APMRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      price:
+        description: ''
+        type: string
+      paidPrice:
+        description: ''
+        type: string
+      currency:
+        description: ''
+        type: string
+      countryCode:
+        description: ''
+        type: string
+      basketId:
+        description: ''
+        type: string
+      paymentGroup:
+        description: ''
+        type: string
+      accountHolderName:
+        description: ''
+        type: string
+      merchantCallbackUrl:
+        description: ''
+        type: string
+      merchantErrorUrl:
+        description: ''
+        type: string
+      merchantNotificationUrl:
+        description: ''
+        type: string
+      apmType:
+        description: ''
+        type: string
+      buyer:
+        $ref: 'buyer.yaml#/definitions/Buyer'
+      shippingAddress:
+        $ref: 'shippingAddress.yaml#/definitions/ShippingAddress'
+      billingAddress:
+        $ref: 'billingAddress.yaml#/definitions/BillingAddress'
+      basketItems:
+          $ref: 'basketItems.yaml#/definitions/BasketItems'
+    required:
+    - price
+    - paidPrice
+    - currency
+    - countryCode
+    - basketId
+    - paymentGroup
+    - accountHolderName
+    - merchantCallbackUrl
+    - merchantErrorUrl
+    - merchantNotificationUrl
+    - apmType
+    - buyer
+    - shippingAddress
+    - billingAddress
+    - basketItems

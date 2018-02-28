@@ -1,0 +1,50 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Retrieve Bounced Bank Transfer List
+  tags:
+  - Api
+  operationId: Retrieve Bounced Bank Transfer List
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/RetrieveBouncedBankTransferListrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  RetrieveBouncedBankTransferListrequest:
+    title: Retrieve Bounced Bank Transfer ListRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      date:
+        description: ''
+        type: string
+    required:
+    - date

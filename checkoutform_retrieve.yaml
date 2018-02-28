@@ -1,0 +1,50 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Retrieve Checkout Form Result
+  tags:
+  - iyzico Checkout Form
+  operationId: Retrieve Checkout Form Result
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/RetrieveCheckoutFormResultrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  RetrieveCheckoutFormResultrequest:
+    title: Retrieve Checkout Form ResultRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      token:
+        description: ''
+        type: string
+    required:
+    - token

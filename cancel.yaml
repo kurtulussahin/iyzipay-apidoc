@@ -1,0 +1,54 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Cancel
+  tags:
+  - Api
+  operationId: Cancel
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/CancelRequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  CancelRequest:
+    title: CancelRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      paymentId:
+        description: ''
+        type: string
+      ip:
+        description: ''
+        type: string
+    required:
+    - paymentId
+    - ip

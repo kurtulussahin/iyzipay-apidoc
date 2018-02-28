@@ -1,0 +1,30 @@
+definitions:        
+  ShippingAddress:
+    title: ShippingAddress
+    type: object
+    properties:
+      address:
+        description: ''
+        type: string
+        example: 'Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1'
+      zipCode:
+        description: ''
+        type: string
+        example: '34742'
+      contactName:
+        description: ''
+        type: string
+        example: 'Jane Doe'
+      city:
+        description: ''
+        type: string
+        example: 'Istanbul'
+      country:
+        description: ''
+        type: string
+        example: 'Turkey'
+    required:
+    - address
+    - contactName
+    - city
+    - country

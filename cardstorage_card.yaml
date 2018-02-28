@@ -1,0 +1,103 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Retrieve Cards
+  tags:
+  - Card Register
+  operationId: Retrieve Cards
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/RetrieveCardsrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+delete:
+  description: 'TODO: Add Description'
+  summary: Delete Card
+  tags:
+  - Card Register
+  operationId: Delete Card
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/DeleteCardrequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  RetrieveCardsrequest:
+    title: Retrieve CardsRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      cardUserKey:
+        description: ''
+        type: string
+    required:
+    - cardUserKey
+  DeleteCardrequest:
+    title: Delete CardRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      cardUserKey:
+        description: ''
+        type: string
+      cardToken:
+        description: ''
+        type: string
+    required:
+    - cardUserKey
+    - cardToken

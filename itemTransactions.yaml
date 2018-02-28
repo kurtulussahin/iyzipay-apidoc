@@ -1,0 +1,47 @@
+definitions:        
+  itemTransactions:
+    title: Item Transactions
+    type: object
+    properties:
+      itemId:
+        description: ''
+        type: string
+        example: BI101
+      paymentTransactionId:
+        description: ''
+        type: string
+        example: 11207021
+      transactionStatus:
+        description: ''
+        type: string
+        example: 2
+      price:
+        description: ''
+        type: string
+        example: 1.0
+      paidPrice:
+        description: ''
+        type: string
+        example: 1.0
+      merchantCommissionRate:
+        description: ''
+        type: string
+        example: 0
+      merchantCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0
+      iyziCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0.02625
+      iyziCommissionFee:
+        description: ''
+        type: string
+        example: 0.25
+      merchantPayoutAmount:
+        description: ''
+        type: string
+        example: 0.72375
+      convertedPayout:
+          $ref: 'convertedPayout.yaml#/definitions/convertedPayout'

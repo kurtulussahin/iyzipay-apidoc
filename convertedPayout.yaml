@@ -1,0 +1,33 @@
+definitions:        
+  convertedPayout:
+    title: Converted Payout
+    type: object
+    properties:
+      paidPrice:
+        description: ''
+        type: string
+        example: 1.0
+      iyziCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0.02625
+      iyziCommissionFee:
+        description: ''
+        type: string
+        example: 0.25
+      merchantPayoutAmount:
+        description: ''
+        type: string
+        example: 0.72375
+      iyziConversionRate:
+        description: ''
+        type: string
+        example: 0
+      iyziConversionRateAmount:
+        description: ''
+        type: string
+        example: 0
+      currency:
+        description: ''
+        type: string
+        example: TRY

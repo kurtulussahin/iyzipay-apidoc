@@ -1,0 +1,41 @@
+definitions:        
+  PaymentCard:
+    title: Payment Card
+    type: object
+    properties:
+      cardHolderName:
+        description: ''
+        type: string
+        example: John Doe
+      cardNumber:
+        description: ''
+        type: string
+        example: 5528790000000008
+      expireYear:
+        description: ''
+        type: string
+        example: 2030
+      expireMonth:
+        description: ''
+        type: string
+        example: 12
+      cvc:
+        description: ''
+        type: string
+        example: 550
+      registerCard:
+        description: ''
+        type: string
+        example: 0
+      cardUserKey:
+        description: ''
+        type: string
+      cardToken:
+        description: ''
+        type: string
+    required:
+    - cardHolderName
+    - cardNumber
+    - expireYear
+    - expireMonth
+    - cvc

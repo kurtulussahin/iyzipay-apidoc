@@ -1,0 +1,54 @@
+post:
+  description: 'TODO: Add Description'
+  summary: Retrieve Payment Result
+  tags:
+  - Api
+  operationId: Retrieve Payment Result
+  produces:
+  - application/json
+  parameters:
+  - name: Body
+    in: body
+    required: true
+    description: ''
+    schema:
+      $ref: '#/definitions/RetrievePaymentResultRequest'
+  - name: Authorization
+    in: header
+    required: true
+    type: string
+    description: ''
+  - name: x-iyzi-rnd
+    in: header
+    required: true
+    type: string
+    description: ''
+  #- name: Content-Type
+  #  default : application/json
+  #  in: header
+  #  required: true
+  #  type: string
+  #  description: ''
+  responses:
+    200:
+      description: ''
+definitions:        
+  RetrievePaymentResultRequest:
+    title: Retrieve Payment ResultRequest
+    type: object
+    properties:
+      locale:
+        description: ''
+        type: string
+      conversationId:
+        description: ''
+        type: string
+      paymentId:
+        description: ''
+        type: string
+      paymentConversationId:
+        description: ''
+        type: string
+    required:
+    - paymentId
+    - paymentConversationId

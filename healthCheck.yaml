@@ -1,0 +1,30 @@
+get:
+  description: 'https://sandbox-api.iyzipay.com/payment/test'
+  summary: Health Check
+  tags:
+  - Api
+  operationId: Heath Check
+  produces:
+  - application/json
+  responses:
+    200:
+      description: ''
+      schema:
+        $ref: '#/definitions/HealthCheckResponse'
+definitions:
+  HealthCheckResponse:
+    title: Health Check Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950

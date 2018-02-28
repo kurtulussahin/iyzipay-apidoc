@@ -1,0 +1,40 @@
+definitions:        
+  BasketItems:
+    title: BasketItems
+    type: array
+    items:
+      $ref: '#/definitions/BasketItem'
+  BasketItem:
+    title: BasketItem
+    type: object
+    properties:
+      id:
+        description: ''
+        type: string
+        example: 'BI101'
+      price:
+        description: ''
+        type: string
+        example: '1.0'
+      name:
+        description: ''
+        type: string
+        example: 'Binocular'
+      category1:
+        description: ''
+        type: string
+        example: 'Collectibles'
+      category2:
+        description: ''
+        type: string
+        example: 'Accessories'
+      itemType:
+        description: ''
+        type: string
+        example: 'PHYSICAL'
+    required:
+    - id
+    - price
+    - name
+    - category1
+    - itemType
