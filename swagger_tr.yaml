@@ -94,48 +94,170 @@ tags:
       ** AMEX kartları ile işlem alabilir şekilde tasarlanmalıdır.
       
       iyzico arka planda çalıştığından üye işyerinin ihtiyaçlarına göre istenilen servisler entegre edilebilir.
+  - name: Authorization String
+    description: | 
+      iyzico ödeme API’sine sorgu yaparken 4 adet başlık bileşeni kullanılır.
+      
+      Accept: Yanıt için kabul edilebilir türü söyler. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
+      
+      Content-type: Sorgu gövdesinin türüdür. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
+      
+      **Authorization**: HTTP kimlik doğrulaması için doğrulama bilgileri alanıdır. Bu iyzico ödeme API’sinde IYZWS ön eki ile başlar. API Key değeri ile devam edip şifreleme sonrası oluşan değer ile “:” (iki nokta) kullanarak birleşir.
+      
+      x-iyzi-rnd: Şifrelemede kullanılan, istemci taracndan belirlenen bir değerdir.
 
+      ## Şifreleme ve PKI
+
+      Şifreleme iyzico ile letişimde kullandığınız API değerine sırası ile random, secret ve gövdenin özel bir biçimde yorumu olan PKI diziminin eklenmesi ile başlanır. oluşan bu değer sha1 ve sonrasında base64encode edilerek son haline ulaşır.
+
+      ### Örnek: 
+      
+      **api değeri**: sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY
+      
+      **random değeri**: 575340984896e
+      
+      **secret değeri**: sandbox-rw2uFVtEXMUvMulFOtqgqPX3g2UuKwzz
+      
+      **PKI değeri**: [locale=tr,conversaMonId=123456,binNumber=454671]
+      
+      **hash değeri**: sandbox- g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY575340984896esandboxrw2uFVtEXMUvMulFOtqgqPX 3g2UuKwzz[locale=tr,conversaMonId=123456,binNumber=454671]
+
+      **base64_encode(sha1(hash değeri))'dan sonra**: 4R4d1K0lDheNgpE0xM0g10NOaLc=
+
+      base64encode edilmiş değeri başlıkta kullanacağımız Authorization değerini bulmak için kullanacağız. Bu değere ulaşmak için IYZWS ön ekini kullanıp API değeri ile base64encode edilmiş değeri iki nokta ile birbirine bağlayacağız. Değerimiz aşağıdaki gibi olacak.
+
+      **authorization değeri**: IYZWS sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY: 4R4d1K0lDheNgpE0xM0g10NOaLc=
+  - name: Parametre Sözlüğü
+    description: | 
+      
+      **locale :**  iyzico istek sonucunda dönen metinlerin dilini ayarlamak için kullanılır. Varsayılan değeri tr’dir. en olarak kullanılabilir.
+      
+      **conversationId :**  İstek esnasında gönderip, sonuçta alabileceğiniz bir değer, request/response eşleşmesi yapmak için kullanılabilir. En yaygın kullanış biçimi üye iş yerinin sipariş numarasıdır.
+      
+      **price :** Ödeme sepet tutarı. Kırılım (sepetin içerisindeki ürünler) tutarlar toplamı sepet tutarına eşit olmalı.
+      
+      **paidPrice :** İndirim vade farkı vs. hesaplanmış POS’tan geçecek nihai tutar. Price değerinden küçük, büyük veya eşit olabilir.
+      
+      **currency :**  Ödemenin alınacağı para birimi default TRY olarak belirlenmiştir. Diğer değerler ise USD, EUR, GBP olmak üzere, farklı para birimleri ile alışverişin hesabınıza tanımlandığından emin olunuz.
+      
+      **installment :** Taksit bilgisi, tek çekim için 1 gönderilmelidir. Geçerli değerler: 1, 2, 3, 6, 9, 12
+      
+      **basketId :**  Üye işyeri tarafından ilgili ödemenin sepetini tanımlamak için kullanılan id'dir. Sipariş numarası ya da anlamlı bir değer olabilir.
+      
+      **paymentChannel :**  Ödeme kanalı. Geçerli değerler enum içinde sunulmaktadır: WEB, MOBILE, MOBILE_WEB, MOBILE_IOS, MOBILE_ANDROID, MOBILE_WINDOWS, MOBILE_TABLET, MOBILE_PHONE
+      
+      **paymentGroup :**  Ödeme grubu, varsayılan PRODUCT. Geçerli değerler enum içinde sunulmaktadır: PRODUCT, LISTING, SUBSCRIPTION, OTHER.
+      
+      **cardNumber :**  Ödemenin alınacağı kart numarası. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+      
+      **expireYear :**  Ödemenin alınacağı kartın son kullanma tarihi yılı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+      
+      **expireMonth :** Ödemenin alınacağı kartın son kullanma tarihi ayı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+      
+      **cvc :** Ödemenin alınacağı kartın güvenlik kodu. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur. Saklı kartla ödeme yapılırken gönderilirse aynen bankaya iletilir.
+      
+      **cardHolderName :**  Ödemenin alınacağı kart sahibinin adı soyadı. Eğer saklı kart ile ödeme yapılmıyorsa zorunludur.
+      
+      **registerCard :**  Ödeme esnasında kartın kaydedilip kaydedilmeyeceğini belirleyen parametre. Varsayılan değeri 0 olup, geçerli değerler 0 ve 1’dir.
+      
+      **id(Buyer) :** Üye işyeri tarafındaki alıcıya ait id.
+      
+      **name(Buyer) :** Üye işyeri tarafındaki alıcıya ait ad.
+      
+      **surname(Buyer) :**  Üye işyeri tarafındaki alıcıya ait soyad.
+      
+      **identityNumber(Buyer) :** Üye işyeri tarafındaki alıcıya ait kimlik (TCKN) numarası.
+      
+      **city(Buyer) :** Üye işyeri tarafındaki alıcıya ait şehir bilgisi.
+      
+      **country(Buyer) :**  Üye işyeri tarafındaki alıcıya ait ülke bilgisi.
+      
+      **email(Buyer) :**  Üye işyeri tarafındaki alıcıya ait e-posta bilgisi. E-posta adresi alıcıya ait geçerli ve erişilebilir bir adres olmalıdır.
+      
+      **gsmNumber(Buyer) :**  Üye işyeri tarafındaki alıcıya ait GSM numarası.
+      
+      **ip(Buyer) :** Üye işyeri tarafındaki alıcıya ait IP adresi.
+      
+      **registrationAddress(Buyer) :**  Üye işyeri tarafındaki alıcıya ait kayıt adresi.
+      
+      **zipCode(Buyer) :**  Üye işyeri tarafındaki alıcıya ait posta kodu.
+      
+      **registrationDate(Buyer) :** Üye işyeri tarafındaki alıcıya ait kayıt tarihi. Tarih formatı 2015-09-17 23:45:06 şeklinde olmalıdır.
+      
+      **lastLoginDate(Buyer) :**  Üye işyeri tarafındaki alıcıya ait son giriş tarihi. Tarih formatı 2015-09-17 23:45:06 şeklinde olmalıdır.
+      
+      **contactName(BillingAddress) :** Üye işyeri tarafındaki fatura adresi, ad soyad bilgisi.
+      
+      **city(BillingAddress) :**  Üye işyeri tarafındaki fatura adresi şehir bilgisi.
+      
+      **country(BillingAddress) :** Üye işyeri tarafındaki fatura adresi ülke bilgisi.
+      
+      **address(BillingAddress) :** Üye işyeri tarafındaki fatura adresi.
+      
+      **zipCode(BillingAddress) :** Üye işyeri tarafındaki fatura adresi posta kodu.
+      
+      **contactName(ShippingAddress) :**  Üye işyeri tarafındaki teslimat adresi, ad soyad bilgisi. Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.
+      
+      **city(ShippingAddress) :** Üye işyeri tarafındaki teslimat adresi şehir bilgisi. Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.
+      
+      **country(ShippingAddress) :**  Üye işyeri tarafındaki teslimat adresi ülke bilgisi. Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.
+      
+      **address(ShippingAddress) :**  Üye işyeri tarafındaki teslimat adresi. Sepetteki ürünlerden en az 1 tanesi fiziksel ürün (itemType=PHYSICAL) ise zorunludur.
+      
+      **zipCode(ShippingAddress) :**  Üye işyeri tarafındaki teslimat adresi posta kodu.
+      
+      **id(BasketItems) :** Üye işyeri tarafındaki sepetteki ürüne ait id.
+      
+      **itemType(BasketItems) :** Üye işyeri tarafındaki sepetteki ürüne ait tip. Geçerli enum değerler: PHYSICAL ve VIRTUAL.
+      
+      **name(BasketItems) :** Üye işyeri tarafındaki sepetteki ürüne ait isim.
+      
+      **category1(BasketItems) :**  Üye işyeri tarafındaki sepetteki ürüne ait kategori 1.
+      
+      **category2(BasketItems) :**  Üye işyeri tarafındaki sepetteki ürüne ait kategori 2.
+      
+      **price(BasketItems) :**  Üye işyeri tarafındaki sepetteki ürüne ait tutar. 0 ve 0’dan küçük olamaz; tutarlar toplamı sepet tutarına (price) eşit olmalıdır.
 paths:
   /payment/test:
-    $ref: '/healthCheck.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/healthCheck.yaml'
   /payment/iyzipos/installment:
-    $ref: '/installment.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/installment.yaml'
   /payment/auth:
-    $ref: '/payment_auth.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/payment_auth.yaml'
   /payment/3dsecure/initialize:
-    $ref: '/payment_3dsecure_initialize.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/payment_3dsecure_initialize.yaml'
   /payment/3dsecure/auth:
-    $ref: '/payment_3dsecure_auth.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/payment_3dsecure_auth.yaml'
   /payment/cancel:
-    $ref: '/cancel.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/cancel.yaml'
   /payment/refund:
-    $ref: '/refund.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/refund.yaml'
   /payment/detail:
-    $ref: '/payment_detail.yaml'
-  /reporting/settlement/payoutCompleted:
-    $ref: '/payoutCompleted.yaml'
-  /payment/apm/initialize:
-    $ref: '/apm_initialize.yaml'
-  /payment/apm/retrieve:
-    $ref: '/apm_retrieve.yaml'
-  /payment/bkm/initialize:
-    $ref: '/bkm_initialize.yaml'
-  /payment/bkm/auth/detail:
-    $ref: '/bkm_retrieve.yaml'
-  /cardstorage/card:
-    $ref: '/cardstorage_card.yaml'
-  /payment/iyzipos/item/approve:
-    $ref: '/approve.yaml'
-  /payment/iyzipos/item/disapprove:
-    $ref: '/disapprove.yaml'
-  /payment/iyzipos/checkoutform/initialize/auth/ecom:
-    $ref: '/card_register_checkoutform_initialize.yaml'
-  /onboarding/submerchant:
-    $ref: '/submerchant.yaml'
-  /onboarding/submerchant/detail:
-    $ref: '/submerchant_detail.yaml'
-  /payment/iyzipos/checkoutform/auth/ecom/detail:
-    $ref: '/checkoutform_retrieve.yaml'
+    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/payment_detail.yaml'
+#  /reporting/settlement/payoutCompleted:
+#     $ref: '/payoutCompleted.yaml'
+#   /payment/apm/initialize:
+#     $ref: '/apm_initialize.yaml'
+#   /payment/apm/retrieve:
+#     $ref: '/apm_retrieve.yaml'
+#   /payment/bkm/initialize:
+#     $ref: '/bkm_initialize.yaml'
+#   /payment/bkm/auth/detail:
+#     $ref: '/bkm_retrieve.yaml'
+#   /cardstorage/card:
+#     $ref: '/cardstorage_card.yaml'
+#   /payment/iyzipos/item/approve:
+#     $ref: '/approve.yaml'
+#   /payment/iyzipos/item/disapprove:
+#     $ref: '/disapprove.yaml'
+#   /payment/iyzipos/checkoutform/initialize/auth/ecom:
+#     $ref: '/card_register_checkoutform_initialize.yaml'
+#   /onboarding/submerchant:
+#     $ref: '/submerchant.yaml'
+#   /onboarding/submerchant/detail:
+#     $ref: '/submerchant_detail.yaml'
+#   /payment/iyzipos/checkoutform/auth/ecom/detail:
+#     $ref: '/checkoutform_retrieve.yaml'
 definitions:
   RetrieveBinNumberRequest:
     title: Retrieve Bin Number Request

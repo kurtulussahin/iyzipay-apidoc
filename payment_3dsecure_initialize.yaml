@@ -1,5 +1,13 @@
 post:
-  description: 'TODO: Add Description'
+  description: | 
+    3D Ödeme sorgusu müşterilerinizin bankamatik kartlarından ve kredi kartından 3ds güvenlik ile para çekme işlemini yapar. Bu servis iki aşamadan oluşmaktadır. 3ds Initialize 1. adımdır.
+    
+    ** Standart Ödeme işleminden farklı olarak callback(dönüş) parametresi gönderilmelidir.
+    
+    ** 3D başlatılan işlemler panelde koyu sarı, üye işyerine dönülen işlemler açık sarı, para çekme yani 3D bitirme sorgusu yapılan işlemler ise ödemenin sonucuna göre yeşil veya kırmızı olarak görünür.
+    
+    ** 3D başlatma sorgusunun sonucunda dönen html tarayıcıya bastırılarak, ödeme yapacak kişinin bankanın 3ds sayfasına yönlenmesi sağlanmalıdır.
+    
   summary: Initialize Threeds Payment
   tags:
   - Api

@@ -1,6 +1,10 @@
 post:
-  description: 'TODO: Add Description'
-  summary: Cancel
+  description: | 
+    iyzico üzerinden tahsil edilen bir ödeme, banka kuralları gereği aynı gün içinde (gün sonu yapılmadan) iptal (cancel) edilebilir.
+    
+    ** İptal işleminin iadeden farkı, ödeme ile aynı gün yapılabilmesi ve kart ekstresinde girdi/çıktı yaratmamasıdır. İptal yapılabilmesi için ödemeye ait id (paymentId) gönderilmesi gerekir. İptal işlemi başarılıysa iptal edilen tutar (price) servisten döner. İptal işlemi tepeden çalışır, yani ödemenin tamamını iptal eder.
+ 
+  summary: Cancel Request          
   tags:
   - Api
   operationId: Cancel
@@ -31,7 +35,9 @@ post:
   #  description: ''
   responses:
     200:
-      description: ''
+      description: success
+      schema:
+        $ref: '#/definitions/CancelResponse'
 definitions:        
   CancelRequest:
     title: CancelRequest
@@ -52,3 +58,35 @@ definitions:
     required:
     - paymentId
     - ip
+  CancelResponse:
+    title: Cancel Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950
+      conversationId:
+        description: ''
+        type: string
+        example: 123456789
+      paymentId:
+        description: ''
+        type: string
+        example: 123456
+      price:
+        description: ''
+        type: string
+        example: 1.0
+      currency:
+        description: ''
+        type: string
+        example: TRY

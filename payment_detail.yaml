@@ -1,5 +1,7 @@
 post:
-  description: 'TODO: Add Description'
+  description: | 
+    iyzico'da kaydı oluşturulan bir işlemin detayları daha sonra sorgulanabilir. Bunun için ödeme sorgulama servisi kullanılabilir.
+    
   summary: Retrieve Payment Result
   tags:
   - Api
@@ -31,7 +33,9 @@ post:
   #  description: ''
   responses:
     200:
-      description: ''
+      description: success
+      schema:
+        $ref: '#/definitions/RetrievePaymentResultResponse'
 definitions:        
   RetrievePaymentResultRequest:
     title: Retrieve Payment ResultRequest
@@ -52,3 +56,104 @@ definitions:
     required:
     - paymentId
     - paymentConversationId
+  RetrievePaymentResultResponse:
+    title: Retrieve Payment Result Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      paymentStatus:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950
+      conversationId:
+        description: ''
+        type: string
+        example: 123456789
+      price:
+        description: ''
+        type: string
+        example: 1.0
+      paidPrice:
+        description: ''
+        type: string
+        example: 1.0
+      installment:
+        description: ''
+        type: string
+        example: 1
+      paymentId:
+        description: ''
+        type: string
+        example: 123456
+      fraudStatus:
+        description: ''
+        type: string
+        example: 2
+      merchantCommissionRate:
+        description: ''
+        type: string
+        example: 0
+      merchantCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0
+      iyziCommissionRateAmount:
+        description: ''
+        type: string
+        example: 0.02625
+      iyziCommissionFee:
+        description: ''
+        type: string
+        example: 0.25
+      cardType:
+        description: ''
+        type: string
+        example: CREDIT_CARD
+      cardAssociation:
+        description: ''
+        type: string
+        example: MASTER_CARD
+      cardFamily:
+        description: ''
+        type: string
+        example: Bonus
+      binNumber:
+        description: ''
+        type: string
+        example: 554960
+      lastFourDigits:
+        description: ''
+        type: string
+        example: 0016
+      basketId:
+        description: ''
+        type: string
+        example: B67832
+      currency:
+        description: ''
+        type: string
+        example: TRY
+      itemTransactions:
+        description: ''
+        type: array
+        items:
+          $ref: 'itemTransactions.yaml#/definitions/itemTransactions'
+      authCode:
+        description: ''
+        type: string
+        example: 260627
+      phase:
+        description: ''
+        type: string
+        example: AUTH

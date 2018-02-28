@@ -1,5 +1,9 @@
 post:
-  description: 'TODO: Add Description'
+  description: | 
+    Bu adım, üye işyeri, iyzico ve banka üçlüsü arasında el sıkışma(handshake) için gereklidir. Bu aşamada henüz para çekilmemiştir. Eğer başarılı bir şekilde dönüş adresinizde paymentId ve conversationData (geldiyse) değerlerini alabildiyseniz, işlemi ödemeye çevirme sorgusunu yapabilirsiniz.
+    
+    ** 3D bitirme sorgusu yapmadığınız takdirde kart sahibi ancak kendisini doğrulamış olacak kalacaktır. mdStatus'u 1'den farklı 3D ödemeleri panelde açık sarı olacak kalacaktır.
+
   summary: Create Threeds
   tags:
   - Api

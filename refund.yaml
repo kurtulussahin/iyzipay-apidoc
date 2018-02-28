@@ -1,5 +1,11 @@
 post:
-  description: 'TODO: Add Description'
+  description: | 
+    iyzico üzerinden tahsil edilen bir ödeme, 365 gün 7/24 iade (refund) edilebilir. İade işlemi mutlaka ekstreye yansır ve iade edilen ödeme taksitli bir işlemse, iadenin karta yansıması bankadan bankaya değişmekle beraber birkaç günü bulabilir. İade işlemi kırılımdan çalışır, yani ödemenin bir kırılımının tamamını veya bir kısmını iade eder.
+    
+    ** İade yapılabilmesi için ödeme kırılımına ait id(paymentTransactionId) ve iade edilecek tutar(price) gönderilmesi gerekir.
+    
+    ** İade işlemi başarılıysa, iade edilen tutar(price) servisten döner. İade edilecek tutar(price), iade edilecek ödemenin kırılımının tutarından(itemTransaction -> paidPrice) ve iade edilebilir kalan tutardan küçük veya eşit olmalıdır. Bu kural sağlandığı sürece ardarda defalarca iade yapılabilir.
+ 
   summary: Refund
   tags:
   - Api
@@ -31,7 +37,9 @@ post:
   #  description: ''
   responses:
     200:
-      description: ''
+      description: success
+      schema:
+        $ref: '#/definitions/RefundResponse'
 definitions:        
   RefundRequest:
     title: RefundRequest
@@ -59,3 +67,39 @@ definitions:
     - paymentTransactionId
     - price
     - ip
+  RefundResponse:
+    title: Refund Response
+    type: object
+    properties:
+      status:
+        description: ''
+        type: string
+        example: success
+      locale:
+        description: 'Language settings'
+        type: string
+        example: tr
+      systemTime:
+        description: ''
+        type: string
+        example: 1495891786950
+      conversationId:
+        description: ''
+        type: string
+        example: 123456789
+      paymentId:
+        description: ''
+        type: string
+        example: 123456
+      paymentTransactionId:
+        description: ''
+        type: string
+        example: 123456
+      price:
+        description: ''
+        type: string
+        example: 1.0
+      currency:
+        description: ''
+        type: string
+        example: TRY
