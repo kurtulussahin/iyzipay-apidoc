@@ -7,7 +7,18 @@ post:
     ** 3D başlatılan işlemler panelde koyu sarı, üye işyerine dönülen işlemler açık sarı, para çekme yani 3D bitirme sorgusu yapılan işlemler ise ödemenin sonucuna göre yeşil veya kırmızı olarak görünür.
     
     ** 3D başlatma sorgusunun sonucunda dönen html tarayıcıya bastırılarak, ödeme yapacak kişinin bankanın 3ds sayfasına yönlenmesi sağlanmalıdır.
-    
+
+    Örnek Kodlar :
+
+    <ul>
+    <li><a href="https://github.com/iyzico/iyzipay-php/blob/master/samples/initialize_threeds.php#L1" target="_blank">Php</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-dotnet/blob/master/Iyzipay.Samples/ThreedsSample.cs#L11" target="_blank">.Net</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-java/blob/master/src/test/java/com/iyzipay/sample/ThreedsSample.java#L17" target="_blank">Java</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-ruby/blob/master/spec/threeds_payment_spec.rb#L13" target="_blank">Ruby</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-python/blob/master/samples/initialize_threeds.py#L11" target="_blank">Python</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-node/blob/master/samples/IyzipaySamples.js#L864" target="_blank">Node.js</a></li>
+    </ul>
+
   summary: Initialize Threeds Payment
   tags:
   - Api

@@ -9,6 +9,17 @@ post:
     ** Başarılı işlemler yeşil, başarısız işlemler ise kırmızı renkte panel üzerinde görüntülenebilir.
     
     ** Üye işyeri tarafında sipariş numarası olarak conversationId ve basketId parametreleri kullanılabilir.
+
+    Örnek Kodlar :
+
+    <ul>
+    <li><a href="https://github.com/iyzico/iyzipay-php/blob/master/samples/create_payment.php#L1" target="_blank">Php</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-dotnet/blob/master/Iyzipay.Samples/PaymentSample.cs#L11" target="_blank">.Net</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-java/blob/master/src/test/java/com/iyzipay/sample/PaymentSample.java#L17" target="_blank">Java</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-ruby/blob/master/spec/payment_spec.rb#L13" target="_blank">Ruby</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-python/blob/master/samples/create_payment.py#L11" target="_blank">Python</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-node/blob/master/samples/IyzipaySamples.js#L334" target="_blank">Node.js</a></li>
+    </ul>
   summary: Create Payment
   tags:
   - Api

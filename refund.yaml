@@ -5,7 +5,18 @@ post:
     ** İade yapılabilmesi için ödeme kırılımına ait id(paymentTransactionId) ve iade edilecek tutar(price) gönderilmesi gerekir.
     
     ** İade işlemi başarılıysa, iade edilen tutar(price) servisten döner. İade edilecek tutar(price), iade edilecek ödemenin kırılımının tutarından(itemTransaction -> paidPrice) ve iade edilebilir kalan tutardan küçük veya eşit olmalıdır. Bu kural sağlandığı sürece ardarda defalarca iade yapılabilir.
- 
+
+    Örnek Kodlar :
+
+    <ul>
+    <li><a href="https://github.com/iyzico/iyzipay-php/blob/master/samples/refund.php#L1" target="_blank">Php</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-dotnet/blob/master/Iyzipay.Samples/RefundSample.cs#L10" target="_blank">.Net</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-java/blob/master/src/test/java/com/iyzipay/sample/RefundSample.java#L17" target="_blank">Java</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-ruby/blob/master/spec/refund_spec.rb#L13" target="_blank">Ruby</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-python/blob/master/samples/refund.py#L11" target="_blank">Python</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-node/blob/master/samples/IyzipaySamples.js#L683" target="_blank">Node.js</a></li>
+    </ul>
+
   summary: Refund
   tags:
   - Api

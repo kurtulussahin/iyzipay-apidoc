@@ -77,6 +77,13 @@ info:
     ** iyzico entegrasyon ekibinin onayı için <a href="mailto:entegrasyon@iyzico.com">**entegrasyon@iyzico.com**</a> mail adresi ile iletişime geçin.
     
     # Header
+
+    `iyzico istemcileri(Client) header bileşenlerini otomatik olarak oluşturmaktadır.`
+
+    `github.com/iyzico adresindeki istemcileri kullanıyor iseniz, "Header" başlığını geçebilirsiniz.`
+
+    `PKI (public key infrastructure) encryption/decryption ve data marshalling/unmarshalling için mutlaka iyzico clientlarının kullanılması tavsiye edilmektedir.`
+
     iyzico ödeme API’sine sorgu yaparken 4 adet başlık bileşeni kullanılır.
       
     **Accept**: Yanıt için kabul edilebilir türü söyler. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
@@ -97,33 +104,54 @@ info:
 
           x-iyzi-rnd: 575340984896e
 
-    ## Authorization
+    ## Authorization ve PKI String
     HTTP kimlik doğrulaması için doğrulama bilgileri alanıdır. Bu iyzico ödeme API’sinde IYZWS ön eki ile başlar. API Key değeri ile devam edip şifreleme sonrası oluşan değer ile “:” (iki nokta) kullanarak birleşir.
     
     ### Şifreleme/Hash
 
     Şifreleme iyzico ile letişimde kullandığınız API değerine sırası ile random, secret ve gövdenin özel bir biçimde yorumu olan PKI diziminin eklenmesi ile başlanır. oluşan bu değer sha1 ve sonrasında base64encode edilerek son haline ulaşır.
 
+        PKI String oluştururken parametre sıralaması önemlidir.
+
     ### Örnek: 
       
     **Api Key**: sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY
       
-    **x-iyzi-rndi**: 575340984896e
+    **x-iyzi-rnd**: 575340984896e
       
     **Secret Key**: sandbox-rw2uFVtEXMUvMulFOtqgqPX3g2UuKwzz
       
     **PKI**: [locale=tr,conversaMonId=123456,binNumber=454671]
       
-    **Hash Öncesi String**: sandbox- g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY575340984896esandboxrw2uFVtEXMUvMulFOtqgqPX 3g2UuKwzz[locale=tr,conversaMonId=123456,binNumber=454671]
+    **Hash String**: sandbox- g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY575340984896esandboxrw2uFVtEXMUvMulFOtqgqPX 3g2UuKwzz[locale=tr,conversaMonId=123456,binNumber=454671]
 
-    **base64_encode(sha1(Hash Öncesi Stringi))**: 4R4d1K0lDheNgpE0xM0g10NOaLc=
+    **base64_encode(sha1(Hash String))**: 4R4d1K0lDheNgpE0xM0g10NOaLc=
 
     base64encode edilmiş değeri başlıkta kullanacağımız Authorization değerini bulmak için kullanacağız. Bu değere ulaşmak için IYZWS ön ekini kullanıp API değeri ile base64encode edilmiş değeri iki nokta ile birbirine bağlayacağız. Değerimiz aşağıdaki gibi olacak.
 
-    **Authorization**: IYZWS sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY:4R4d1K0lDheNgpE0xM0g10NOaLc 
-    
-    ### PKI
-    
+    **Authorization**: IYZWS sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY:4R4d1K0lDheNgpE0xM0g10NOaLc
+
+    ## Retrieve Installment Authorization Örneği
+
+        Api Key       : sandbox-afXhZPW0MQlE4dCUUlHcEopnMBgXnAZI
+        Secret Key    : sandbox-wbwpzKIiplZxI3hh5ALI4FJyAcZKL6kq
+
+      **Request Body**  : "{ "locale": "tr", "conversationId": "123456789", "price":"100.0", "binNumber":"554960" }"
+
+      **PKI String**    : [locale=tr,conversationId=123456789,binNumber=554960,price=100.0]
+
+      **Hash String**   : sandbox-afXhZPW0MQlE4dCUUlHcEopnMBgXnAZIx-iyzi-rndsandbox-wbwpzKIiplZxI3hh5ALI4FJyAcZKL6kq[locale=tr,conversationId=123456789,binNumber=554960,price=100.0]
+
+      **Hash**          : GUIuVgX2o702mUHFi/s7TKQUTEI=
+
+      **Authorization** : IYZWS sandbox-afXhZPW0MQlE4dCUUlHcEopnMBgXnAZI:GUIuVgX2o702mUHFi/s7TKQUTEI=
+
+      Request Headers:
+
+        Authorization:"IYZWS sandbox-afXhZPW0MQlE4dCUUlHcEopnMBgXnAZI:GUIuVgX2o702mUHFi/s7TKQUTEI="
+        x-iyzi-rnd:"x-iyzi-rnd"
+        Content-Type:"application/json"
+
 host: "sandbox-api.iyzipay.com"
 schemes:
  - "https"
@@ -238,7 +266,7 @@ paths:
   /payment/test:
     $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/healthCheck.yaml'
   /payment/iyzipos/installment:
-    $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/installment.yaml'
+    $ref: 'installment.yaml'
   /payment/auth:
     $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/payment_auth.yaml'
   /payment/3dsecure/initialize:

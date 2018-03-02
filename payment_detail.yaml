@@ -1,7 +1,18 @@
 post:
   description: | 
     iyzico'da kaydı oluşturulan bir işlemin detayları daha sonra sorgulanabilir. Bunun için ödeme sorgulama servisi kullanılabilir.
-    
+
+    Örnek Kodlar :
+
+    <ul>
+    <li><a href="https://github.com/iyzico/iyzipay-php/blob/master/samples/retrieve_payment_result.php#L1" target="_blank">Php</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-dotnet/blob/master/Iyzipay.Samples/PaymentSample.cs#L304" target="_blank">.Net</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-java/blob/master/src/test/java/com/iyzipay/sample/PaymentSample.java#L307" target="_blank">Java</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-ruby/blob/master/spec/payment_spec.rb#L262" target="_blank">Ruby</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-python/blob/master/samples/retrieve_payment_result.py#L11" target="_blank">Python</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-node/blob/master/samples/IyzipaySamples.js#L582" target="_blank">Node.js</a></li>
+    </ul>
+
   summary: Retrieve Payment Result
   tags:
   - Api

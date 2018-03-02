@@ -1,6 +1,19 @@
 post:
   description: |
     Taksit sorgulama(installment), ilgili kart bir kredi kartı ise ve bir taksit programına dahil ise, kaç taksit yapılabileceği ve taksit komisyon oranı konusunda bilgi vermektedir.
+
+    Örnek Kodlar :
+
+    <ul>
+    <li><a href="https://github.com/iyzico/iyzipay-php/blob/master/samples/retrieve_installments.php#L1" target="_blank">Php</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-dotnet/blob/master/Iyzipay.Samples/InstallmentSample.cs#L10" target="_blank">.Net</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-java/blob/master/src/test/java/com/iyzipay/sample/InstallmentSample.java#L16" target="_blank">Java</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-ruby/blob/master/spec/installment_spec.rb#L13" target="_blank">Ruby</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-python/blob/master/samples/retrieve_installments.py#L12" target="_blank">Python</a></li>
+    <li><a href="https://github.com/iyzico/iyzipay-node/blob/master/samples/IyzipaySamples.js#L319" target="_blank">Node.js</a></li>
+    </ul>
+
+
   summary: Retrieve Installment
   tags:
   - Api
@@ -14,22 +27,6 @@ post:
     description: ''
     schema:
       $ref: '#/definitions/RetrieveInstallmentRequest'
-  - name: Authorization
-    in: header
-    required: true
-    type: string
-    description: ''
-  - name: x-iyzi-rnd
-    in: header
-    required: true
-    type: string
-    description: ''
-  - name: Content-Type
-    in: header
-    required: true
-    type: string
-    description: 'Content-Type should be application/json'
-    example: application/json
   responses:
     200:
       description: success
