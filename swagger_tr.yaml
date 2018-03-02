@@ -3,6 +3,7 @@ info:
   version: '1.0'
   title: 'iyzipay'
   description: |
+
     # Disclaimer
     iyzico resmi api dökümantasyonu değildir. 
     https://dev.iyzipay.com/tr adresinden iyzico resmi api dökümantasyonuna ulaşabilirsiniz.
@@ -75,6 +76,53 @@ info:
     
     ** iyzico entegrasyon ekibinin onayı için <a href="mailto:entegrasyon@iyzico.com">**entegrasyon@iyzico.com**</a> mail adresi ile iletişime geçin.
     
+    # Header
+    iyzico ödeme API’sine sorgu yaparken 4 adet başlık bileşeni kullanılır.
+      
+    **Accept**: Yanıt için kabul edilebilir türü söyler. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
+      
+    **Content-type**: Sorgu gövdesinin türüdür. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
+      
+    **Authorization**: HTTP kimlik doğrulaması için doğrulama bilgileri alanıdır. Bu iyzico ödeme API’sinde IYZWS ön eki ile başlar. API Key değeri ile devam edip şifreleme sonrası oluşan değer ile “:” (iki nokta) kullanarak birleşir.
+      
+    **x-iyzi-rnd**: Şifrelemede kullanılan, istemci taracndan belirlenen bir değerdir
+    
+    Örnek :
+    
+          Accept:application/json
+
+          Content-Type:application/json
+
+          Authorization: IYZWS sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY:4R4d1K0lDheNgpE0xM0g10NOaLc=
+
+          x-iyzi-rnd: 575340984896e
+
+    ## Authorization
+    HTTP kimlik doğrulaması için doğrulama bilgileri alanıdır. Bu iyzico ödeme API’sinde IYZWS ön eki ile başlar. API Key değeri ile devam edip şifreleme sonrası oluşan değer ile “:” (iki nokta) kullanarak birleşir.
+    
+    ### Şifreleme/Hash
+
+    Şifreleme iyzico ile letişimde kullandığınız API değerine sırası ile random, secret ve gövdenin özel bir biçimde yorumu olan PKI diziminin eklenmesi ile başlanır. oluşan bu değer sha1 ve sonrasında base64encode edilerek son haline ulaşır.
+
+    ### Örnek: 
+      
+    **Api Key**: sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY
+      
+    **x-iyzi-rndi**: 575340984896e
+      
+    **Secret Key**: sandbox-rw2uFVtEXMUvMulFOtqgqPX3g2UuKwzz
+      
+    **PKI**: [locale=tr,conversaMonId=123456,binNumber=454671]
+      
+    **Hash Öncesi String**: sandbox- g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY575340984896esandboxrw2uFVtEXMUvMulFOtqgqPX 3g2UuKwzz[locale=tr,conversaMonId=123456,binNumber=454671]
+
+    **base64_encode(sha1(Hash Öncesi Stringi))**: 4R4d1K0lDheNgpE0xM0g10NOaLc=
+
+    base64encode edilmiş değeri başlıkta kullanacağımız Authorization değerini bulmak için kullanacağız. Bu değere ulaşmak için IYZWS ön ekini kullanıp API değeri ile base64encode edilmiş değeri iki nokta ile birbirine bağlayacağız. Değerimiz aşağıdaki gibi olacak.
+
+    **Authorization**: IYZWS sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY:4R4d1K0lDheNgpE0xM0g10NOaLc 
+    
+    ### PKI
     
 host: "sandbox-api.iyzipay.com"
 schemes:
@@ -94,39 +142,7 @@ tags:
       ** AMEX kartları ile işlem alabilir şekilde tasarlanmalıdır.
       
       iyzico arka planda çalıştığından üye işyerinin ihtiyaçlarına göre istenilen servisler entegre edilebilir.
-  - name: Authorization String
-    description: | 
-      iyzico ödeme API’sine sorgu yaparken 4 adet başlık bileşeni kullanılır.
-      
-      Accept: Yanıt için kabul edilebilir türü söyler. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
-      
-      Content-type: Sorgu gövdesinin türüdür. Bu iyzico ödeme API’sinde applicaMon/json’dur. 
-      
-      **Authorization**: HTTP kimlik doğrulaması için doğrulama bilgileri alanıdır. Bu iyzico ödeme API’sinde IYZWS ön eki ile başlar. API Key değeri ile devam edip şifreleme sonrası oluşan değer ile “:” (iki nokta) kullanarak birleşir.
-      
-      x-iyzi-rnd: Şifrelemede kullanılan, istemci taracndan belirlenen bir değerdir.
 
-      ## Şifreleme ve PKI
-
-      Şifreleme iyzico ile letişimde kullandığınız API değerine sırası ile random, secret ve gövdenin özel bir biçimde yorumu olan PKI diziminin eklenmesi ile başlanır. oluşan bu değer sha1 ve sonrasında base64encode edilerek son haline ulaşır.
-
-      ### Örnek: 
-      
-      **api değeri**: sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY
-      
-      **random değeri**: 575340984896e
-      
-      **secret değeri**: sandbox-rw2uFVtEXMUvMulFOtqgqPX3g2UuKwzz
-      
-      **PKI değeri**: [locale=tr,conversaMonId=123456,binNumber=454671]
-      
-      **hash değeri**: sandbox- g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY575340984896esandboxrw2uFVtEXMUvMulFOtqgqPX 3g2UuKwzz[locale=tr,conversaMonId=123456,binNumber=454671]
-
-      **base64_encode(sha1(hash değeri))'dan sonra**: 4R4d1K0lDheNgpE0xM0g10NOaLc=
-
-      base64encode edilmiş değeri başlıkta kullanacağımız Authorization değerini bulmak için kullanacağız. Bu değere ulaşmak için IYZWS ön ekini kullanıp API değeri ile base64encode edilmiş değeri iki nokta ile birbirine bağlayacağız. Değerimiz aşağıdaki gibi olacak.
-
-      **authorization değeri**: IYZWS sandbox-g5xrwHyFozT9X7DXsDsYEM9abHwGT6nY: 4R4d1K0lDheNgpE0xM0g10NOaLc=
   - name: Parametre Sözlüğü
     description: | 
       
@@ -217,6 +233,7 @@ tags:
       **category2(BasketItems) :**  Üye işyeri tarafındaki sepetteki ürüne ait kategori 2.
       
       **price(BasketItems) :**  Üye işyeri tarafındaki sepetteki ürüne ait tutar. 0 ve 0’dan küçük olamaz; tutarlar toplamı sepet tutarına (price) eşit olmalıdır.
+
 paths:
   /payment/test:
     $ref: 'https://raw.githubusercontent.com/kurtulussahin/iyzipay-apidoc/master/healthCheck.yaml'
